@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<?xml-stylesheet type="text/xsl" href="callbacks.xsl"?>
+
+<plugin name="MotionQuadRL" author="redwan06me@gmail.com">
+    <description>This plugin  will enable DDPG agent to control a custom quadrotor</description>
+    <command name="drlEnv">
+        <description>Track the moving target.</description>
+        <params>
+            <param name="start" type="table" item-type="float">
+                <description>A vector of floats of current state </description>
+            </param>
+            <param name="dest" type="table" item-type="float">
+                <description>A vector of floats of target state </description>
+            </param>
+        </params>
+        <return>
+            <param name="u_t" type="table" item-type="float">
+                <description>A vector of floats represents control signals</description>
+            </param>
+        </return>
+    </command>
+    <command name="genTraj">
+        <description>Compute the trajectory for point A to B.</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>id of the robot</description>
+            </param>
+            <param name="start" type="table" item-type="float">
+                <description> Starting Position vector for the robot. </description>
+            </param>
+            <param name="dest" type="table" item-type="float">
+                <description>Destination position vector for the robot. </description>
+            </param>
+            <param name="speed" type="float">
+                <description> travel speed. </description>
+            </param>
+        </params>
+        <return>
+            <param name="cost" type="float">
+                <description>cost of the trajectory</description>
+            </param>
+        </return>
+    </command>
+    <command name="executeTraj">
+        <description>Compute the trajectory for point A to B.</description>
+        <params>
+            <param name="objectHandle" type="int">
+                <description>id of the robot</description>
+            </param>
+            <param name="dt"  type="float">
+                <description> delta time: simulation step . </description>
+            </param>
+        </params>
+        <return>
+            <param name="status" type="int">
+                <description>trajectory completion status. boolean false means finish</description>
+            </param>
+            <param name="pos" type="table" item-type="float">
+                <description>robot next pose. </description>
+            </param>
+        </return>
+    </command>
+</plugin>
